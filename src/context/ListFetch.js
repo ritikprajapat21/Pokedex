@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import useTypes from "../hooks/useTypes";
 
 const ListFetch = createContext({});
 
@@ -8,8 +7,6 @@ export const ListFetchProvider = ({ children }) => {
   const [fetchListUrl, setFetchListUrl] = useState(
     "https://pokeapi.co/api/v2/pokemon?limit=25"
   );
-  //   const { fetchListUrl } = useTypes();
-  console.log(fetchListUrl);
 
   const [list, setList] = useState([]);
 
@@ -20,7 +17,6 @@ export const ListFetchProvider = ({ children }) => {
         const result = response.data?.pokemon?.map((p) => {
           return { ...p.pokemon };
         });
-        console.log(result);
         setList(result);
       };
       fetchList();
@@ -33,7 +29,6 @@ export const ListFetchProvider = ({ children }) => {
     try {
       const fetchList = async () => {
         const response = await axios.get(fetchListUrl);
-        console.log(response.data);
         setList(response.data.results);
       };
       fetchList();
@@ -43,7 +38,9 @@ export const ListFetchProvider = ({ children }) => {
   }, []);
 
   return (
-    <ListFetch.Provider value={{ list, fetchListUrl, setFetchListUrl }}>
+    <ListFetch.Provider
+      value={{ list, setList, fetchListUrl, setFetchListUrl }}
+    >
       {children}
     </ListFetch.Provider>
   );

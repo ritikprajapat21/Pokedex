@@ -9,7 +9,6 @@ import { ListFetchProvider } from "./context/ListFetch";
 import { TypeProvider } from "./context/TypeContext";
 
 function App() {
-  const [imageUrl, setImageUrl] = useState("");
   const [url, setUrl] = useState("");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,9 +19,9 @@ function App() {
         <TypeProvider>
           <Search />
         </TypeProvider>
-        <List onOpen={onOpen} setImageUrl={setImageUrl} setUrl={setUrl} />
+        <List onOpen={onOpen} setUrl={setUrl} />
       </ListFetchProvider>
-      <Modal isOpen={isOpen} imageUrl={imageUrl} onClose={onClose} url={url} />
+      <Modal isOpen={isOpen} onClose={onClose} url={url} />
     </main>
   );
 }

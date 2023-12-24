@@ -1,20 +1,21 @@
 import React from "react";
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import useTypes from "../../../hooks/useTypes";
 import useListFetch from "../../../hooks/useListFetch";
+import useTypes from "../../../hooks/useTypes";
 
 const Types = () => {
   const { types } = useTypes();
   const { setFetchListUrl } = useListFetch();
 
   return (
-    <Menu>
+    <Menu maxW={20}>
       <MenuButton width={190} as={Button} rightIcon={<ChevronDownIcon />}>
         Type
       </MenuButton>
       <MenuList>
         {types.map((type, id) => {
+          const name = type.name.charAt(0).toUpperCase() + type.name.slice(1);
           return (
             <MenuItem
               key={id}
@@ -23,7 +24,7 @@ const Types = () => {
                 setFetchListUrl(type.url);
               }}
             >
-              <span>{type.name}</span>
+              <span>{name}</span>
             </MenuItem>
           );
         })}

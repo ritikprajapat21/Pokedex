@@ -14,13 +14,12 @@ import {
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
-const PokemonModal = ({ isOpen, onClose, imageUrl, url }) => {
+const PokemonModal = ({ isOpen, onClose, url }) => {
   const [pokemon, setPokemon] = useState();
 
   useEffect(() => {
     try {
       const getData = async () => {
-        console.log(url);
         const response = await axios(url);
         setPokemon(response.data);
       };
