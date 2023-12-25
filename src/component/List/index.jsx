@@ -37,7 +37,7 @@ const List = ({ onOpen, setUrl }) => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, []);
 
   return (
     <Box margin={10}>
@@ -69,10 +69,6 @@ const List = ({ onOpen, setUrl }) => {
           );
         })}
       </SimpleGrid>
-      <Box>
-        <Button>Previous Page</Button>
-        <Button>Next Page</Button>
-      </Box>
     </Box>
   );
 };
