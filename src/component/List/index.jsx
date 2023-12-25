@@ -1,5 +1,5 @@
 import { Box, Button, SimpleGrid } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Card from "../Card";
 
 import useListFetch from "../../hooks/useListFetch";
@@ -37,7 +37,7 @@ const List = ({ onOpen, setUrl }) => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   return (
     <Box margin={10}>
