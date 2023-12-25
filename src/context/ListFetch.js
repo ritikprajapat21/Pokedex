@@ -8,6 +8,10 @@ export const ListFetchProvider = ({ children }) => {
     "https://pokeapi.co/api/v2/pokemon?limit=25"
   );
 
+  const [url, setPokemonUrl] = useState(
+    "https://pokeapi.co/api/v2/pokemon?offset=25&limit=25"
+  );
+
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -39,7 +43,14 @@ export const ListFetchProvider = ({ children }) => {
 
   return (
     <ListFetch.Provider
-      value={{ list, setList, fetchListUrl, setFetchListUrl }}
+      value={{
+        list,
+        setList,
+        url,
+        setPokemonUrl,
+        fetchListUrl,
+        setFetchListUrl,
+      }}
     >
       {children}
     </ListFetch.Provider>

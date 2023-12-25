@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, Button, SimpleGrid } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Card from "../Card";
 
@@ -6,22 +6,19 @@ import useListFetch from "../../hooks/useListFetch";
 import axios from "axios";
 
 const List = ({ onOpen, setUrl }) => {
-  const { list, setList } = useListFetch();
-
-  const [count, setCount] = useState(25);
+  const { list, setList, url, setPokemonUrl } = useListFetch();
 
   const fetchData = async () => {
-    console.log("fetching");
-    console.log(count);
+    console.log(url);
     try {
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon?limit=25&offset=${count}`
-      );
+      const response = await axios.get(url);
+      console.log(response.data);
       const result = response.data.results;
       setList((prev) => {
         return [...prev, ...result];
       });
-      setCount((prev) => prev + 25);
+      console.log("Next url", response.data.next);
+      setPokemonUrl(response.data.next);
     } catch (err) {
       console.error(err);
     }
@@ -72,6 +69,10 @@ const List = ({ onOpen, setUrl }) => {
           );
         })}
       </SimpleGrid>
+      <Box>
+        <Button>Previous Page</Button>
+        <Button>Next Page</Button>
+      </Box>
     </Box>
   );
 };
